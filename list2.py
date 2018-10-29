@@ -9,7 +9,6 @@
 # http://code.google.com/edu/languages/google-python-class/
 
 # Additional basic list exercises
-from heapq import merge
 """This import allows me to use the merge function """
 
 # D. Given a list of numbers, return a list where
@@ -18,21 +17,31 @@ from heapq import merge
 # modify the passed in list.
 def remove_adjacent(nums):
     """Using the list and sets built in functions the nums will be reduced with no duplicates."""
-    return list(set(nums))
+    new_nums = []
+    for num in nums:
+        if len(new_nums) ==0 or num != new_nums[-1]:
+            new_nums.append(num)
+    return new_nums
+
 # E. Given two lists sorted in increasing order, create and return a merged
 # list of all the elements in sorted order. You may modify the passed in lists.
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
-    """Using merge from heap queue. Merge will return a merged list with in the current sorted order."""
-    return list(merge(list1,list2))
-
-
-
+    """while loop to pop items off the list until its empty."""
+    result = []
+    while len(list1) and len(list2):
+        if list1[0] < list2[0]:
+            result.append(list1.pop(0))
+        else:
+            result.append(list2.pop(0))
+    result.extend(list1)
+    result.extend(list2)
+    return result
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
 def test(got, expected):
-    if got == expected:
+    if got == expected: 
         prefix = ' OK '
     else:
         prefix = '  X '
@@ -45,6 +54,7 @@ def main():
     test(remove_adjacent([1, 2, 2, 3]), [1, 2, 3])
     test(remove_adjacent([2, 2, 3, 3, 3]), [2, 3])
     test(remove_adjacent([]), [])
+    test(remove_adjacent([1,2,3,2]), [1,2,3,2])
 
     print('linear_merge')
     test(linear_merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
