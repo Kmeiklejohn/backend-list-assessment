@@ -23,9 +23,12 @@
 # and last chars of the string are the same.
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
-    """Your code goes here.  Edit this docstring."""
-    return
-
+    """This function counts matching letters and returns them."""
+    count = 0
+    for word in words:
+        if len(word) >= 2 and word[0] == word[-1]:
+            count += 1
+    return count
 
 # B. front_x
 # Given a list of strings, return a list with the strings
@@ -35,8 +38,18 @@ def match_ends(words):
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
 def front_x(words):
-    """Your code goes here.  Edit this docstring."""
-    return
+    """Sorting two list and adding them together"""
+    xlist = []
+    mainlist = []
+
+    for word in words:
+        if word[0] == "x":
+            xlist.append(word)
+            xlist.sort()
+        else:
+            mainlist.append(word)
+            mainlist.sort()
+    return xlist + mainlist
 
 
 # C. sort_last
@@ -46,8 +59,12 @@ def front_x(words):
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
-    """Your code goes here.  Edit this docstring."""
-    return
+    """sorting the list by the last element. Using the lambda key word I created a anon function that will sort
+        the turples by the last element .
+    """
+    return sorted(tuples, key=lambda x:x[-1])
+
+    
 
 
 # Simple provided test() function used in main() to print
